@@ -1,5 +1,6 @@
 """Tests for statistics functions within the Model layer."""
 
+import os
 import numpy as np
 import numpy.testing as npt
 from inflammation.models import analyse_data, daily_mean, compute_standard_deviation_by_day, CSVDataSource, JSONDataSource
@@ -73,6 +74,18 @@ def test_analyse_data_mock_source():
   analyse_data(data_source)
 
 
+
+@pytest.mark.parametrize('data, expected_standard_deviation', [
+    ([0, 0, 0], 0.0),
+    ([1.0, 1.0, 1.0], 0),
+    ([0.0, 2.0], 1.0)
+])
+def test_daily_standard_deviation(data, expected_standard_deviation):
+    from inflammation.models import s_dev
+    result_data = s_dev(data)['standard deviation']
+    npt.assert_approx_equal(result_data, expected_standard_deviation)
+    
+    
 def test_analyse_data():
     path = os.path.join( os.getcwd(), "data/")
     data_source = CSVDataSource(path)
