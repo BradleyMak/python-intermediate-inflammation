@@ -29,4 +29,4 @@ Here is a step-by-step guide for how to install Inflam:
 - setup a virtual environment: in the root directory of the project, run 'python3 -m venv venv'
 - activate the virtual environment: run 'source venv/bin/activate'
 - run 'pip install -r requirements.txt' to install all required dependencies
-- enjoy!
+- enjoy!!!
